@@ -12,7 +12,7 @@
 
 **Eja Menu** is an ultra-lightweight, zero-dependency digital menu designed for fast-casual food businesses and barbecue pop-ups. Customers can seamlessly browse menu items, adjust quantities, toggle between pickup and delivery, and send pre-formatted order details straight to WhatsApp with one tap.
 
-Live Site: **[eja-menu.netlify.app](https://eja-menu.netlify.app/)**
+Live Site: **[eja-menu.netlify.app](https://eja-menu.vercel.app/)**
 
 ---
 
