@@ -296,6 +296,32 @@
           if (next) next.focus();
         });
         render();
+
+        // Sold-out status is read from a published Google Sheet (columns: id, available).
+        // available = "no" marks the item as sold out; anything else keeps it orderable.
+        const availabilitySheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7wpz1ktw8lE2zMC7yIhyJnvQPrWAf1S0gUbxu39aDFDvLSEzGIu7sESB0jsgpF1NCo-stvWtVeXNe/pub?gid=926412198&single=true&output=csv';
+        async function loadAvailability() {
+          try {
+            const response = await fetch(availabilitySheetUrl, { cache: 'no-store' });
+            if (!response.ok) return;
+            const rows = (await response.text()).split(/\r?\n/).map((line) => line.split(','));
+            const status = new Map();
+            for (const row of rows) {
+              const id = (row[0] || '').trim().toLowerCase();
+              const available = (row[1] || '').trim().toLowerCase();
+              if (id && available) status.set(id, available);
+            }
+            if (!status.size) return;
+            for (const item of menuItems) {
+              item.soldOut = status.get(item.id) === 'no';
+              if (item.soldOut) quantities[item.id] = 0;
+            }
+            render();
+          } catch (error) {
+            // If the sheet can't be loaded, leave every item orderable.
+          }
+        }
+        loadAvailability();
       })();
     </script>
   </body>
