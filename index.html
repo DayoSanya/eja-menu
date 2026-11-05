@@ -62,16 +62,18 @@
       .brand-header { display: flex; flex-direction: column; align-items: center; }
       .brand-logo { display: block; width: 39.5%; height: auto; object-fit: contain; }
       .brand-tagline { margin: 10px 0 0; font-size: 15px; font-weight: 400; letter-spacing: .02em; text-align: center; }
-      .brand-divider { width: 44px; height: 3px; margin: 12px auto 22px; background: var(--orange); }
-      .menu-section + .menu-section { margin-top: 16px; }
-      .section-heading { margin: 20px 0 6px; color: var(--orange-text); font-size: 14px; font-weight: 700; letter-spacing: .06em; line-height: 1.4; text-transform: uppercase; }
+      .menu-section, .delivery-section, .details-section { margin-top: clamp(32px, 8vw, 56px); }
+      .brand-header + .menu-section { margin-top: 36px; }
+      .section-heading { margin: 0 0 18px; color: var(--orange); font-size: 14px; font-weight: 700; letter-spacing: .06em; line-height: 1.4; text-transform: uppercase; }
+      .section-heading { display: flex; align-items: center; gap: 12px; }
+      .section-heading::after { flex: 1 1 auto; height: 3px; min-width: 16px; content: ""; background: #E8782A; }
       .menu-list, .summary-list { margin: 0; padding: 0; list-style: none; }
       .menu-row { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; }
       .menu-row + .menu-row.fish { border-top: 1px solid color-mix(in srgb, var(--maroon), transparent 28%); }
       .menu-row.side { min-height: 68px; }
       .item-information { min-width: 0; }
       .item-name { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.35; }
-      .side .item-name { font-size: 15px; font-weight: 400; }
+      .side .item-name { font-size: 15px; font-weight: 600; }
       .item-description { margin: 3px 0 0; font-size: 12px; font-style: italic; line-height: 1.4; }
       .item-actions { flex: 0 0 auto; text-align: right; }
       .item-price { margin: 0; font-size: 16px; font-weight: 700; white-space: nowrap; }
@@ -100,7 +102,6 @@
       .add-button { background: var(--maroon); color: var(--cream); }
       .add-button:hover { background: #790040; color: var(--cream); }
       .quantity-value { min-width: 18px; font-weight: 700; text-align: center; }
-      .delivery-section { margin-top: 10px; }
       .delivery-switch { position: relative; display: flex; min-height: 48px; align-items: center; justify-content: space-between; gap: 16px; margin: 4px 0; cursor: pointer; font-size: 15px; font-weight: 700; }
       .delivery-switch input { position: absolute; right: 0; z-index: 1; width: 48px; height: 30px; margin: 0; opacity: 0; cursor: pointer; }
       .switch-track { position: relative; width: 48px; height: 28px; flex: 0 0 48px; border: 1.5px solid var(--maroon); border-radius: 999px; transition: background-color 150ms ease; }
@@ -109,18 +110,18 @@
       .delivery-switch input:checked + .switch-track::after { transform: translateX(20px); background: var(--cream); }
       .delivery-switch input:focus-visible + .switch-track { outline: 3px solid var(--focus); outline-offset: 3px; }
       .delivery-note { margin: 0 0 10px; font-size: 12px; font-style: italic; line-height: 1.45; }
+      .optional { font-style: italic; }
       .field-label { display: block; margin: 10px 0 6px; font-size: 13px; font-weight: 700; }
       .field-input { display: block; resize: vertical; width: 100%; min-height: 46px; padding: 10px 12px; border: 1.5px solid var(--maroon); border-radius: 12px; background: transparent; color: var(--maroon); font-size: 16px; }
       .field-input::placeholder { color: var(--maroon); opacity: .58; }
       .field-hint { margin: 6px 0 0; font-size: 12px; font-weight: 700; line-height: 1.4; }
       .sold-out { margin: 0; font-size: 13px; font-weight: 700; opacity: .7; }
-      .details-section { margin-top: 6px; }
-      .order-summary { margin-top: 18px; padding-top: 12px; border-top: 1px dashed var(--maroon); font-size: 14px; }
+      .order-summary { margin-top: clamp(32px, 8vw, 52px); padding-top: 12px; border-top: 1px dashed var(--maroon); font-size: 14px; }
       .summary-list li, .summary-total { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; }
       .summary-list li span:last-child, .summary-total span:last-child { flex: 0 0 auto; text-align: right; }
       .summary-total { margin-top: 4px; font-size: 16px; font-weight: 700; }
       .clear-order { min-height: 40px; margin-top: 2px; padding: 4px 0; border: 0; background: transparent; color: var(--maroon); cursor: pointer; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
-      .order-link { display: flex; min-height: 52px; align-items: center; justify-content: center; margin-top: 16px; padding: 14px 12px; border-radius: 14px; background: var(--maroon); color: var(--cream); font-size: 15px; font-weight: 700; line-height: 1.35; text-align: center; text-decoration: none; transition: background-color 150ms ease, transform 150ms ease; }
+      .order-link { display: flex; min-height: 52px; align-items: center; justify-content: center; margin-top: clamp(32px, 8vw, 52px); padding: 14px 12px; border-radius: 14px; background: var(--maroon); color: var(--cream); font-size: 15px; font-weight: 700; line-height: 1.35; text-align: center; text-decoration: none; transition: background-color 150ms ease, transform 150ms ease; }
       .order-link:hover { background: #790040; }
       .order-link:active { transform: translateY(1px); }
       .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
@@ -141,7 +142,6 @@
         <header class="brand-header">
           <img class="brand-logo" src="logo.png" alt="Eja" width="340" height="308" fetchpriority="high" decoding="async">
           <h1 id="page-title" class="brand-tagline">Fish barbecue</h1>
-          <span class="brand-divider" aria-hidden="true"></span>
         </header>
         <section class="menu-section" aria-labelledby="fish-heading">
           <h2 id="fish-heading" class="section-heading">Grilled fish</h2>
@@ -154,7 +154,7 @@
         <section class="delivery-section" aria-labelledby="delivery-heading">
           <h2 id="delivery-heading" class="section-heading">Delivery</h2>
           <label class="delivery-switch" for="delivery-mode">
-            <span id="mode-label">Delivery</span>
+            <span id="mode-label">Deliver to me</span>
             <input id="delivery-mode" type="checkbox" role="switch" checked aria-label="Delivery selected">
             <span class="switch-track" aria-hidden="true"></span>
           </label>
@@ -168,10 +168,10 @@
         </section>
         <section class="details-section" aria-labelledby="details-heading">
           <h2 id="details-heading" class="section-heading">Your details</h2>
-          <label class="field-label" for="customer-name">Name (optional)</label>
-          <input id="customer-name" class="field-input" type="text" autocomplete="name" maxlength="60" placeholder="Your name">
-          <label class="field-label" for="order-note">Note for the grill (optional)</label>
-          <textarea id="order-note" class="field-input" rows="2" maxlength="300" placeholder="For example: less pepper, no onions"></textarea>
+          <label class="field-label" for="customer-name">Name <span class="optional">(optional)</span></label>
+          <input id="customer-name" class="field-input" type="text" autocomplete="name" maxlength="60" placeholder="What should eja call you?">
+          <label class="field-label" for="order-note">Note <span class="optional">(optional)</span></label>
+          <textarea id="order-note" class="field-input" rows="2" maxlength="300" placeholder="e.g. less spicy, no onions"></textarea>
         </section>
         <section id="order-summary" class="order-summary" aria-labelledby="order-summary-heading" aria-live="polite" hidden>
           <h2 id="order-summary-heading" class="visually-hidden">Your order</h2>
@@ -268,7 +268,7 @@
 
         deliveryMode.addEventListener('change', () => {
           isDelivery = deliveryMode.checked;
-          modeLabel.textContent = isDelivery ? 'Delivery' : 'Pickup';
+          modeLabel.textContent = isDelivery ? 'Deliver to me' : 'Pickup instead';
           deliveryMode.setAttribute('aria-label', `${isDelivery ? 'Delivery' : 'Pickup'} selected`);
           deliveryNote.hidden = !isDelivery;
           pickupNote.hidden = isDelivery;
