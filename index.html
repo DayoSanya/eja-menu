@@ -8,17 +8,17 @@
     <meta name="robots" content="index,follow,max-image-preview:large">
     <title>Eja Menu | Grilled Fish &amp; Sides — Order on WhatsApp</title>
     <meta name="description" content="Browse the Eja menu of grilled fish and sides, choose pickup or delivery, and send your order through WhatsApp. Delivery fees vary by location and are not included in the total.">
-    <link rel="canonical" href="https://eja-menu.netlify.app/">
+    <link rel="canonical" href="https://eja-menu.vercel.app/">
     <link rel="icon" href="favicon.ico" sizes="32x32">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://eja-menu.netlify.app/">
+    <meta property="og:url" content="https://eja-menu.vercel.app/">
     <meta property="og:site_name" content="Eja Menu">
     <meta property="og:title" content="Eja Menu | Grilled Fish &amp; Sides">
     <meta property="og:description" content="Browse grilled fish and sides, choose pickup or delivery, and send your order on WhatsApp.">
-    <meta property="og:image" content="https://eja-menu.netlify.app/eja-social-preview.png">
-    <meta property="og:image:secure_url" content="https://eja-menu.netlify.app/eja-social-preview.png">
+    <meta property="og:image" content="https://eja-menu.vercel.app/eja-social-preview.png">
+    <meta property="og:image:secure_url" content="https://eja-menu.vercel.app/eja-social-preview.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Eja Menu | Grilled Fish &amp; Sides">
     <meta name="twitter:description" content="Browse grilled fish and sides, choose pickup or delivery, and send your order on WhatsApp.">
-    <meta name="twitter:image" content="https://eja-menu.netlify.app/eja-social-preview.png">
+    <meta name="twitter:image" content="https://eja-menu.vercel.app/eja-social-preview.png">
     <meta name="twitter:image:alt" content="Eja grilled fish menu with WhatsApp ordering">
     <style>
       :root {
@@ -37,6 +37,7 @@
         --cream: #f7d7a4;
         --maroon: #970051;
         --orange: #e8782a;
+        --orange-text: #9a4208;
         --focus: #2b1a22;
       }
       @media (prefers-color-scheme: dark) {
@@ -53,9 +54,9 @@
         color: var(--ink);
         font-family: "DejaVu Sans", Verdana, system-ui, sans-serif;
       }
-      button, input { font: inherit; }
-      button, a, input { -webkit-tap-highlight-color: transparent; }
-      button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+      button, input, textarea { font: inherit; }
+      button, a, input, textarea { -webkit-tap-highlight-color: transparent; }
+      button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
       .page-shell { display: flex; min-height: calc(100vh - 32px); justify-content: center; align-items: flex-start; }
       .menu-card { width: min(100%, 440px); margin: 0 auto; padding: 20px 20px 24px; border-radius: 28px; background: var(--cream); color: var(--maroon); }
       .brand-header { display: flex; flex-direction: column; align-items: center; }
@@ -63,7 +64,7 @@
       .brand-tagline { margin: 10px 0 0; font-size: 15px; font-weight: 400; letter-spacing: .02em; text-align: center; }
       .brand-divider { width: 44px; height: 3px; margin: 12px auto 22px; background: var(--orange); }
       .menu-section + .menu-section { margin-top: 16px; }
-      .section-heading { margin: 20px 0 6px; color: var(--orange); font-size: 14px; font-weight: 700; letter-spacing: .06em; line-height: 1.4; text-transform: uppercase; }
+      .section-heading { margin: 20px 0 6px; color: var(--orange-text); font-size: 14px; font-weight: 700; letter-spacing: .06em; line-height: 1.4; text-transform: uppercase; }
       .menu-list, .summary-list { margin: 0; padding: 0; list-style: none; }
       .menu-row { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; }
       .menu-row + .menu-row.fish { border-top: 1px solid color-mix(in srgb, var(--maroon), transparent 28%); }
@@ -108,9 +109,12 @@
       .delivery-switch input:checked + .switch-track::after { transform: translateX(20px); background: var(--cream); }
       .delivery-switch input:focus-visible + .switch-track { outline: 3px solid var(--focus); outline-offset: 3px; }
       .delivery-note { margin: 0 0 10px; font-size: 12px; font-style: italic; line-height: 1.45; }
-      .address-label { display: block; margin: 10px 0 6px; font-size: 13px; font-weight: 700; }
-      .address-input { display: block; width: 100%; min-height: 46px; padding: 10px 12px; border: 1.5px solid var(--maroon); border-radius: 12px; background: transparent; color: var(--maroon); font-size: 16px; }
-      .address-input::placeholder { color: var(--maroon); opacity: .58; }
+      .field-label { display: block; margin: 10px 0 6px; font-size: 13px; font-weight: 700; }
+      .field-input { display: block; resize: vertical; width: 100%; min-height: 46px; padding: 10px 12px; border: 1.5px solid var(--maroon); border-radius: 12px; background: transparent; color: var(--maroon); font-size: 16px; }
+      .field-input::placeholder { color: var(--maroon); opacity: .58; }
+      .field-hint { margin: 6px 0 0; font-size: 12px; font-weight: 700; line-height: 1.4; }
+      .sold-out { margin: 0; font-size: 13px; font-weight: 700; opacity: .7; }
+      .details-section { margin-top: 6px; }
       .order-summary { margin-top: 18px; padding-top: 12px; border-top: 1px dashed var(--maroon); font-size: 14px; }
       .summary-list li, .summary-total { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; }
       .summary-list li span:last-child, .summary-total span:last-child { flex: 0 0 auto; text-align: right; }
@@ -155,10 +159,19 @@
             <span class="switch-track" aria-hidden="true"></span>
           </label>
           <p id="delivery-note" class="delivery-note">Delivery fee is not included in the total and varies by location.</p>
+          <p id="pickup-note" class="delivery-note" hidden>Pickup location and time will be confirmed on WhatsApp.</p>
           <div id="address-group">
-            <label class="address-label" for="delivery-address">Delivery address or landmark</label>
-            <input id="delivery-address" class="address-input" type="text" autocomplete="street-address" placeholder="Enter delivery address or landmark">
+            <label class="field-label" for="delivery-address">Delivery address or landmark</label>
+            <input id="delivery-address" class="field-input" type="text" autocomplete="street-address" maxlength="200" placeholder="Enter delivery address or landmark">
+            <p id="address-hint" class="field-hint" hidden>Add your address or landmark so we can deliver.</p>
           </div>
+        </section>
+        <section class="details-section" aria-labelledby="details-heading">
+          <h2 id="details-heading" class="section-heading">Your details</h2>
+          <label class="field-label" for="customer-name">Name (optional)</label>
+          <input id="customer-name" class="field-input" type="text" autocomplete="name" maxlength="60" placeholder="Your name">
+          <label class="field-label" for="order-note">Note for the grill (optional)</label>
+          <textarea id="order-note" class="field-input" rows="2" maxlength="300" placeholder="For example: less pepper, no onions"></textarea>
         </section>
         <section id="order-summary" class="order-summary" aria-labelledby="order-summary-heading" aria-live="polite" hidden>
           <h2 id="order-summary-heading" class="visually-hidden">Your order</h2>
@@ -171,6 +184,7 @@
     </main>
     <script>
       (() => {
+        // To mark an item sold out, add soldOut: true to it, e.g. { id: 'croaker', ..., soldOut: true }
         const menuItems = [
           { id: 'catfish', name: 'Catfish', description: 'Smoky, with pepper sauce', price: 5500, category: 'fish' },
           { id: 'tilapia', name: 'Tilapia', description: 'Spiced and charcoal grilled', price: 6000, category: 'fish' },
@@ -193,6 +207,10 @@
         const deliveryNote = document.getElementById('delivery-note');
         const addressGroup = document.getElementById('address-group');
         const deliveryAddress = document.getElementById('delivery-address');
+        const customerName = document.getElementById('customer-name');
+        const orderNote = document.getElementById('order-note');
+        const pickupNote = document.getElementById('pickup-note');
+        const addressHint = document.getElementById('address-hint');
         const summary = document.getElementById('order-summary');
         const summaryList = document.getElementById('summary-list');
         const summaryTotal = document.getElementById('summary-total');
@@ -202,10 +220,13 @@
         function renderMenuRow(item) {
           const quantity = quantities[item.id];
           const description = item.description ? `<p class="item-description">${item.description}</p>` : '';
+          const addButton = item.soldOut
+            ? '<p class="sold-out">Sold out</p>'
+            : `<button class="quantity-button add-button" type="button" data-item="${item.id}" data-change="1" aria-label="Add ${item.name}">+</button>`;
           const removeButton = quantity > 0
             ? `<button class="quantity-button remove-button" type="button" data-item="${item.id}" data-change="-1" aria-label="Remove one ${item.name}">−</button><span class="quantity-value">${quantity}</span>`
             : '';
-          return `<li class="menu-row ${item.category}"><div class="item-information"><h3 class="item-name">${item.name}</h3>${description}</div><div class="item-actions"><p class="item-price">${priceMarkup(item.price)}</p><div class="quantity-controls">${removeButton}<button class="quantity-button add-button" type="button" data-item="${item.id}" data-change="1" aria-label="Add ${item.name}">+</button></div></div></li>`;
+          return `<li class="menu-row ${item.category}"><div class="item-information"><h3 class="item-name">${item.name}</h3>${description}</div><div class="item-actions"><p class="item-price">${priceMarkup(item.price)}</p><div class="quantity-controls">${removeButton}${addButton}</div></div></li>`;
         }
 
         function render() {
@@ -221,12 +242,18 @@
           if (selectedItems.length > 0) {
             summaryList.innerHTML = selectedItems.map((item) => `<li><span>${item.quantity} × ${item.name}</span><span>${priceMarkup(item.lineTotal)}</span></li>`).join('');
             summaryTotal.innerHTML = `<span>Total</span><span>${priceMarkup(total)}</span>`;
+            const address = deliveryAddress.value.trim();
+            const name = customerName.value.trim();
+            const note = orderNote.value.trim();
             const message = [
               'Hello, I would like to order:',
               ...selectedItems.map((item) => `${item.quantity} × ${item.name} — ${formatPrice(item.price)} each (${formatPrice(item.lineTotal)})`),
               `Total: ${formatPrice(total)}`,
-              isDelivery ? 'Delivery' : 'Pickup',
-              ...(isDelivery && deliveryAddress.value.trim() ? [`Address: ${deliveryAddress.value.trim()}`] : []),
+              ...(isDelivery
+                ? ['Delivery (fee to be confirmed)', address ? `Address: ${address}` : 'Address: (will send)']
+                : ['Pickup']),
+              ...(name ? [`Name: ${name}`] : []),
+              ...(note ? [`Note: ${note}`] : []),
             ].join('\n');
             orderLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
             orderLink.innerHTML = `Send order on WhatsApp · ${priceMarkup(total)}`;
@@ -236,6 +263,7 @@
             orderLink.textContent = 'Order on WhatsApp: 0902 751 0364';
             orderLink.setAttribute('aria-label', 'Order on WhatsApp at 0902 751 0364');
           }
+          addressHint.hidden = !(isDelivery && selectedItems.length > 0 && !deliveryAddress.value.trim());
         }
 
         deliveryMode.addEventListener('change', () => {
@@ -243,10 +271,11 @@
           modeLabel.textContent = isDelivery ? 'Delivery' : 'Pickup';
           deliveryMode.setAttribute('aria-label', `${isDelivery ? 'Delivery' : 'Pickup'} selected`);
           deliveryNote.hidden = !isDelivery;
+          pickupNote.hidden = isDelivery;
           addressGroup.hidden = !isDelivery;
           render();
         });
-        deliveryAddress.addEventListener('input', render);
+        [deliveryAddress, customerName, orderNote].forEach((field) => field.addEventListener('input', render));
         document.addEventListener('click', (event) => {
           const target = event.target;
           if (!(target instanceof Element)) return;
@@ -262,6 +291,9 @@
           if (!item) return;
           quantities[item.id] = Math.max(0, quantities[item.id] + Number(button.dataset.change));
           render();
+          const next = document.querySelector(`button[data-item="${item.id}"][data-change="${button.dataset.change}"]`)
+            || document.querySelector(`button[data-item="${item.id}"][data-change="1"]`);
+          if (next) next.focus();
         });
         render();
       })();

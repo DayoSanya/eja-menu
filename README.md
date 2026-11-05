@@ -2,9 +2,7 @@
 
 > A lightning-fast, mobile-first web ordering menu for barbecue grilled fish and sides with instant WhatsApp order generation.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Netlify Status](https://img.shields.io/badge/Deploy-Netlify-00C7B7?logo=netlify&logoColor=white)](https://eja-menu.netlify.app/)
-[![Speed](https://img.shields.io/badge/PageSpeed-100%2F100-brightgreen.svg)](#performance--optimization)
+[![Deployed on Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel&logoColor=white)](https://eja-menu.vercel.app/)
 
 ---
 
@@ -12,22 +10,25 @@
 
 **Eja Menu** is an ultra-lightweight, zero-dependency digital menu designed for fast-casual food businesses and barbecue pop-ups. Customers can seamlessly browse menu items, adjust quantities, toggle between pickup and delivery, and send pre-formatted order details straight to WhatsApp with one tap.
 
-Live Site: **[eja-menu.netlify.app](https://eja-menu.vercel.app/)**
+Live Site: **[eja-menu.vercel.app](https://eja-menu.vercel.app/)**
 
 ---
 
 ## ✨ Features
 
-- **⚡ Blazing Fast Performance:** Zero heavy frameworks, zero runtime libraries. The total page weight is under ~20 KB for instantaneous loads even on 3G mobile networks.
-- **📱 Mobile-First & Responsive:** Clean, accessible touch targets, haptic feel, smooth transitions, and viewport-safe inset support for modern smartphones.
+- **⚡ Lightweight:** One HTML file with built-in CSS and JavaScript, no frameworks or libraries, so it loads quickly even on slow mobile connections.
+- **📱 Mobile-First & Responsive:** Large touch targets, smooth transitions, and safe-area support for modern smartphones.
 - **🐟 Interactive Cart & Live Summary:**
   - Dynamic item counters (`+` / `−`) with instant price recalculations.
   - Nigerian Naira (`₦`) currency formatting with custom SVG symbols.
   - Real-time collapsible order review with a one-tap clear option.
 - **🛵 Delivery & Pickup Switch:**
   - Interactive switch toggle.
-  - Dynamic delivery address field (auto-hides when pickup is chosen).
-  - Clear customer guidance on delivery fee policies.
+  - Delivery address field (hides when pickup is chosen) with a reminder if it is left blank.
+  - Pickup note shown when pickup is chosen.
+  - Clear customer guidance on delivery fee policies; the order message says the fee is to be confirmed.
+- **📝 Customer Details:** Optional name and a note for the grill (for example, "less pepper") are added to the WhatsApp message.
+- **🚫 Sold-Out Flag:** Mark any menu item as sold out with one setting (see [Updating the Menu](#-updating-the-menu)).
 - **💬 Direct WhatsApp Ordering:**
   - Auto-compiles an organized, easy-to-read order receipt directly into a pre-filled WhatsApp message URL.
   - One-tap handoff to merchant line (`0902 751 0364`).
@@ -53,6 +54,18 @@ Live Site: **[eja-menu.netlify.app](https://eja-menu.vercel.app/)**
 
 ---
 
+## ✏️ Updating the Menu
+
+Menu items and prices are listed in the `menuItems` list near the top of the script in `index.html`. To change a price, edit the number. To mark an item sold out, add `soldOut: true`:
+
+```js
+{ id: 'croaker', name: 'Croaker', description: 'Whole fish, house marinade', price: 8000, category: 'fish', soldOut: true },
+```
+
+Commit the change and the site redeploys. Remove `soldOut: true` when the item is back. If you change a price here, update the Menu Items list above too.
+
+---
+
 ## 🛠️ Tech Stack
 
 - **HTML5:** Semantic markup, accessibility labels (`aria-*`), and Open Graph metadata.
@@ -63,7 +76,7 @@ Live Site: **[eja-menu.netlify.app](https://eja-menu.vercel.app/)**
 
 ## 🚀 Performance & Optimization
 
-- **Zero External Dependencies:** No jQuery, React, or heavy fonts blocking the Critical Rendering Path (CRP).
+- **Zero External Dependencies:** No jQuery, React, or web fonts to download before the page shows.
 - **Optimized Assets:** High-performance SVG and PNG favicons, async-decoded brand logo.
 - **Edge Deployment Ready:** Drop-in deployable to any CDN or static hosting platform (Netlify, Vercel, GitHub Pages, Cloudflare Pages).
 
@@ -107,6 +120,8 @@ No package manager or build tool required.
 
 ## 🚢 Deployment
 
+The live site runs on **Vercel**. Use one host as the main site. If you also deploy elsewhere, keep the `canonical` and `og:` addresses in `index.html` pointing at the main site (currently `https://eja-menu.vercel.app/`).
+
 ### Deploy to Netlify
 1. Connect your GitHub repository to [Netlify](https://www.netlify.com/).
 2. Set **Publish directory** to `/` (root).
@@ -116,9 +131,3 @@ No package manager or build tool required.
 1. Import your GitHub repository into [Vercel](https://vercel.com/).
 2. Select **Other** as the framework preset.
 3. Leave output directory empty and click **Deploy**.
-
----
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
