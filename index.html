@@ -169,7 +169,7 @@
         <section class="details-section" aria-labelledby="details-heading">
           <h2 id="details-heading" class="section-heading">Your details</h2>
           <label class="field-label" for="customer-name">Name <span class="optional">(optional)</span></label>
-          <input id="customer-name" class="field-input" type="text" autocomplete="name" maxlength="60" placeholder="What should eja call you?">
+          <input id="customer-name" class="field-input" type="text" autocomplete="name" maxlength="60" placeholder="nickname/alias works too">
           <label class="field-label" for="order-note">Note <span class="optional">(optional)</span></label>
           <textarea id="order-note" class="field-input" rows="2" maxlength="300" placeholder="e.g. less spicy, no onions"></textarea>
         </section>
@@ -246,13 +246,13 @@
             const name = customerName.value.trim();
             const note = orderNote.value.trim();
             const message = [
-              'Hello, I would like to order:',
-              ...selectedItems.map((item) => `${item.quantity} × ${item.name} — ${formatPrice(item.price)} each (${formatPrice(item.lineTotal)})`),
-              `Total: ${formatPrice(total)}`,
+              "Hello eja, I'd like to place an order:",
+              ...selectedItems.map((item) => `${item.quantity} × ${item.name} — ${formatPrice(item.lineTotal)}`),
+              `*Total: ${formatPrice(total)}*`,
               ...(isDelivery
-                ? ['Delivery (fee to be confirmed)', address ? `Address: ${address}` : 'Address: (will send)']
-                : ['Pickup']),
-              ...(name ? [`Name: ${name}`] : []),
+                ? [address ? `*Delivery address: ${address}*` : '*Delivery address:* _(not decided)_']
+                : ['*Pickup*']),
+              ...(name ? [`*Name: ${name}*`] : []),
               ...(note ? [`Note: ${note}`] : []),
             ].join('\n');
             orderLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
