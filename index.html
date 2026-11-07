@@ -70,11 +70,26 @@
       .section-heading { margin: 0 0 18px; color: var(--orange); font-size: 14px; font-weight: 700; letter-spacing: .06em; line-height: 1.4; text-transform: uppercase; }
       .section-heading { display: flex; align-items: center; gap: 12px; }
       .section-heading::after { flex: 1 1 auto; height: 3px; min-width: 16px; content: ""; background: #E8782A; }
+      .open-notice { display: flex; align-items: center; justify-content: center; gap: 8px; margin: -4px -4px 16px; padding: 9px 14px; border-radius: 14px; background: color-mix(in srgb, #2e7d32, transparent 86%); color: #1b5e20; font-size: 13px; font-weight: 700; line-height: 1.35; text-align: center; }
+      .open-notice[hidden] { display: none; }
+      .open-notice::before { width: 8px; height: 8px; flex: 0 0 8px; border-radius: 50%; background: #2e7d32; content: ""; }
+      .brand-header { position: relative; padding-bottom: 4px; }
+      .brand-header::before { position: absolute; inset: -6px 0 0; z-index: 0; border-radius: 20px; background: repeating-linear-gradient(90deg, transparent 0 11px, color-mix(in srgb, var(--maroon), transparent 93%) 11px 13px); -webkit-mask-image: linear-gradient(to bottom, #000, transparent); mask-image: linear-gradient(to bottom, #000, transparent); content: ""; pointer-events: none; }
+      .brand-header > * { position: relative; z-index: 1; }
+      .item-photo { position: relative; width: 72px; height: 72px; flex: 0 0 72px; overflow: hidden; border-radius: 14px; background: color-mix(in srgb, var(--maroon), transparent 90%); color: var(--maroon); }
+      .item-photo.side { width: 52px; height: 52px; flex-basis: 52px; border-radius: 12px; }
+      .item-photo svg { position: absolute; inset: 22%; width: 56%; height: 56%; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6; opacity: .75; }
+      .item-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      .photo-badge { position: absolute; top: 4px; right: 4px; z-index: 2; display: grid; min-width: 22px; height: 22px; place-items: center; padding: 0 6px; border-radius: 999px; background: var(--maroon); color: var(--cream); font-size: 12px; font-weight: 700; line-height: 1; }
+      .best-seller { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 999px; background: var(--orange); color: #2b1a22; font-size: 11px; font-weight: 700; letter-spacing: .02em; line-height: 1.4; vertical-align: 2px; white-space: nowrap; }
+      .menu-row.is-sold-out .item-photo, .menu-row.is-sold-out .item-information { opacity: .45; filter: grayscale(1); }
+      .menu-row.is-sold-out .item-price { opacity: .5; }
       .menu-list, .summary-list { margin: 0; padding: 0; list-style: none; }
       .menu-row { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; }
+      .menu-row .item-photo { align-self: center; }
       .menu-row + .menu-row.fish { border-top: 1px solid color-mix(in srgb, var(--maroon), transparent 28%); }
       .menu-row.side { min-height: 68px; }
-      .item-information { min-width: 0; }
+      .item-information { min-width: 0; flex: 1 1 auto; }
       .item-name { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.35; }
       .side .item-name { font-size: 15px; font-weight: 600; }
       .item-description { margin: 3px 0 0; font-size: 12px; font-style: italic; line-height: 1.4; }
@@ -124,7 +139,7 @@
       .summary-list li span:last-child, .summary-total span:last-child { flex: 0 0 auto; text-align: right; }
       .summary-total { margin-top: 4px; font-size: 16px; font-weight: 700; }
       .clear-order { min-height: 40px; margin-top: 2px; padding: 4px 0; border: 0; background: transparent; color: var(--maroon); cursor: pointer; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
-      .order-link { display: flex; min-height: 52px; align-items: center; justify-content: center; margin-top: clamp(32px, 8vw, 52px); padding: 14px 12px; border-radius: 14px; background: var(--maroon); color: var(--cream); font-size: 15px; font-weight: 700; line-height: 1.35; text-align: center; text-decoration: none; transition: background-color 150ms ease, transform 150ms ease; }
+      .order-link { position: sticky; bottom: max(12px, env(safe-area-inset-bottom, 0px)); z-index: 10; display: flex; min-height: 52px; flex-wrap: wrap; align-items: center; justify-content: center; gap: 2px 8px; box-shadow: 0 8px 20px rgba(43, 26, 34, .3); margin-top: clamp(32px, 8vw, 52px); padding: 14px 12px; border-radius: 14px; background: var(--maroon); color: var(--cream); font-size: 15px; font-weight: 700; line-height: 1.35; text-align: center; text-decoration: none; transition: background-color 150ms ease, transform 150ms ease; }
       .order-link:hover { background: #790040; }
       .order-link:active { transform: translateY(1px); }
       .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
@@ -132,6 +147,9 @@
         body { padding-right: 12px; padding-left: 12px; }
         .menu-card { padding-right: 16px; padding-left: 16px; }
         .item-name { font-size: 16px; }
+        .item-photo { width: 56px; height: 56px; flex-basis: 56px; }
+        .item-photo.side { width: 44px; height: 44px; flex-basis: 44px; }
+        .quantity-button { width: 38px; height: 38px; flex-basis: 38px; }
         .quantity-controls { gap: 5px; }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -142,6 +160,7 @@
   <body>
     <main class="page-shell">
       <article class="menu-card" aria-labelledby="page-title">
+        <div id="open-notice" class="open-notice" role="status" hidden></div>
         <header class="brand-header">
           <img class="brand-logo" src="logo.png" alt="Eja" width="340" height="308" fetchpriority="high" decoding="async">
           <h1 id="page-title" class="brand-tagline">Fish barbecue</h1>
@@ -189,7 +208,7 @@
       (() => {
         // To mark an item sold out, add soldOut: true to it, e.g. { id: 'croaker', ..., soldOut: true }
         const menuItems = [
-          { id: 'catfish', name: 'Catfish', description: 'Smoky, with pepper sauce', price: 5000, category: 'fish' },
+          { id: 'catfish', name: 'Catfish', description: 'Smoky, with pepper sauce', price: 5000, category: 'fish', bestSeller: true },
           { id: 'tilapia', name: 'Tilapia', description: 'Spiced and charcoal grilled', price: 6000, category: 'fish' },
           { id: 'croaker', name: 'Croaker', description: 'Whole fish, house marinade', price: 8000, category: 'fish' },
           { id: 'sweet-potato', name: 'Sweet potato', price: 1000, category: 'side' },
@@ -200,6 +219,11 @@
           { id: 'pepper-sauce', name: 'Extra pepper sauce', price: 500, category: 'side' },
         ];
         const whatsappNumber = '2349027510364';
+        // Food photos: put images in a "photos" folder named after the item id (e.g. photos/catfish.jpg).
+        // If a photo is missing, a simple icon is shown instead.
+        const fishIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12c3-4.5 7-6 11-5 2.2.6 4 2 5.5 5-1.5 3-3.3 4.4-5.5 5-4 1-8-.5-11-5z"/><path d="M19 12l3-3.5v7z"/><circle cx="8.5" cy="11" r=".6"/></svg>';
+        const plateIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg>';
+        const openNotice = document.getElementById('open-notice');
         const quantities = Object.fromEntries(menuItems.map((item) => [item.id, 0]));
         const formatPrice = (amount) => `₦${amount.toLocaleString('en-US')}`;
         const priceMarkup = (amount) => `<span class="price-value"><svg class="naira-mark" viewBox="0 0 14 18" aria-hidden="true"><path d="M3 15V3l8 12V3M1 8h12M1 11h12"/></svg><span>${amount.toLocaleString('en-US')}</span><span class="visually-hidden">Nigerian naira</span></span>`;
@@ -229,7 +253,10 @@
           const removeButton = quantity > 0
             ? `<button class="quantity-button remove-button" type="button" data-item="${item.id}" data-change="-1" aria-label="Remove one ${item.name}">−</button><span class="quantity-value">${quantity}</span>`
             : '';
-          return `<li class="menu-row ${item.category}"><div class="item-information"><h3 class="item-name">${item.name}</h3>${description}</div><div class="item-actions"><p class="item-price">${priceMarkup(item.price)}</p><div class="quantity-controls">${removeButton}${addButton}</div></div></li>`;
+          const photoBadge = quantity > 0 ? `<span class="photo-badge" aria-hidden="true">${quantity}</span>` : '';
+          const photo = `<div class="item-photo ${item.category}">${item.category === 'fish' ? fishIcon : plateIcon}<img src="photos/${item.id}.jpg" alt="" loading="lazy" onerror="this.remove()">${photoBadge}</div>`;
+          const bestSeller = item.bestSeller && !item.soldOut ? '<span class="best-seller">Best seller</span>' : '';
+          return `<li class="menu-row ${item.category}${item.soldOut ? ' is-sold-out' : ''}">${photo}<div class="item-information"><h3 class="item-name">${item.name}${bestSeller}</h3>${description}</div><div class="item-actions"><p class="item-price">${priceMarkup(item.price)}</p><div class="quantity-controls">${removeButton}${addButton}</div></div></li>`;
         }
 
         function render() {
@@ -259,7 +286,8 @@
               ...(note ? [`Note: ${note}`] : []),
             ].join('\n');
             orderLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-            orderLink.innerHTML = `Send order on WhatsApp · ${priceMarkup(total)}`;
+            const itemCount = selectedItems.reduce((sum, item) => sum + item.quantity, 0);
+            orderLink.innerHTML = `<span>${itemCount} ${itemCount === 1 ? 'item' : 'items'} · ${priceMarkup(total)}</span><span>Send order on WhatsApp</span>`;
             orderLink.setAttribute('aria-label', `Send order on WhatsApp, total ${total.toLocaleString('en-US')} Nigerian naira`);
           } else {
             orderLink.href = `https://wa.me/${whatsappNumber}`;
@@ -278,7 +306,20 @@
           addressGroup.hidden = !isDelivery;
           render();
         });
+        // Remember name and delivery address on this phone for repeat orders.
+        const detailsKey = 'eja-details';
+        try {
+          const saved = JSON.parse(localStorage.getItem(detailsKey) || '{}');
+          if (saved.name) customerName.value = saved.name;
+          if (saved.address) deliveryAddress.value = saved.address;
+        } catch (error) {}
+        function saveDetails() {
+          try {
+            localStorage.setItem(detailsKey, JSON.stringify({ name: customerName.value.trim(), address: deliveryAddress.value.trim() }));
+          } catch (error) {}
+        }
         [deliveryAddress, customerName, orderNote].forEach((field) => field.addEventListener('input', render));
+        [deliveryAddress, customerName].forEach((field) => field.addEventListener('input', saveDetails));
         document.addEventListener('click', (event) => {
           const target = event.target;
           if (!(target instanceof Element)) return;
@@ -300,20 +341,46 @@
         });
         render();
 
-        // Sold-out status is read from a published Google Sheet (columns: id, available).
-        // available = "no" marks the item as sold out; anything else keeps it orderable.
+        // Sheet columns: id, available. Rows:
+        //   an item id with available = "no" marks it sold out;
+        //   a row with id "notice" shows its text at the top of the page (leave it empty to hide).
         const availabilitySheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS7wpz1ktw8lE2zMC7yIhyJnvQPrWAf1S0gUbxu39aDFDvLSEzGIu7sESB0jsgpF1NCo-stvWtVeXNe/pub?gid=926412198&single=true&output=csv';
+        function parseCsv(text) {
+          const rows = [];
+          let row = [];
+          let field = '';
+          let quoted = false;
+          for (let index = 0; index < text.length; index += 1) {
+            const char = text[index];
+            if (quoted) {
+              if (char === '"' && text[index + 1] === '"') { field += '"'; index += 1; }
+              else if (char === '"') quoted = false;
+              else field += char;
+            } else if (char === '"') quoted = true;
+            else if (char === ',') { row.push(field); field = ''; }
+            else if (char === '\n' || char === '\r') {
+              if (char === '\r' && text[index + 1] === '\n') index += 1;
+              row.push(field); rows.push(row); row = []; field = '';
+            } else field += char;
+          }
+          row.push(field); rows.push(row);
+          return rows;
+        }
         async function loadAvailability() {
           try {
             const response = await fetch(availabilitySheetUrl, { cache: 'no-store' });
             if (!response.ok) return;
-            const rows = (await response.text()).split(/\r?\n/).map((line) => line.split(','));
+            const rows = parseCsv(await response.text());
             const status = new Map();
+            let noticeText = '';
             for (const row of rows) {
               const id = (row[0] || '').trim().toLowerCase();
-              const available = (row[1] || '').trim().toLowerCase();
-              if (id && available) status.set(id, available);
+              const value = (row[1] || '').trim();
+              if (id === 'notice') noticeText = value;
+              else if (id && value) status.set(id, value.toLowerCase());
             }
+            openNotice.textContent = noticeText;
+            openNotice.hidden = !noticeText;
             if (!status.size) return;
             for (const item of menuItems) {
               item.soldOut = status.get(item.id) === 'no';
@@ -321,7 +388,7 @@
             }
             render();
           } catch (error) {
-            // If the sheet can't be loaded, leave every item orderable.
+            // If the sheet can't be loaded, leave every item orderable and hide the notice.
           }
         }
         loadAvailability();
