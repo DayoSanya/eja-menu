@@ -63,10 +63,7 @@
       .page-shell { display: flex; min-height: calc(100vh - 32px); justify-content: center; align-items: flex-start; }
       .menu-card { width: min(100%, 440px); margin: 0 auto; padding: 20px 20px 24px; border-radius: 28px; background: var(--cream); color: var(--maroon); }
       .brand-header { display: flex; flex-direction: column; align-items: center; }
-      .brand-logo-wrap { position: relative; display: block; width: 39.5%; }
-      .brand-logo { display: block; width: 100%; height: auto; object-fit: contain; }
-      /* Grill-rack lines cut through the logo characters (only where the logo has ink). */
-      .brand-logo-wrap::after { position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 9px, var(--cream) 9px 11px); -webkit-mask: url("logo.png") center / 100% 100% no-repeat; mask: url("logo.png") center / 100% 100% no-repeat; content: ""; pointer-events: none; }
+      .brand-logo { display: block; width: 39.5%; height: auto; object-fit: contain; }
       .brand-tagline { margin: 20px 0 0; font-family: "Lato", "Gill Sans", Calibri, sans-serif; text-transform: uppercase; font-size: 11.25px; font-weight: 400; letter-spacing: .25em; padding-left: .25em; text-align: center; }
       .menu-section, .delivery-section, .details-section { margin-top: clamp(32px, 8vw, 56px); }
       .brand-header + .menu-section { margin-top: 48px; }
@@ -77,6 +74,8 @@
       .open-notice[hidden] { display: none; }
       .open-notice::before { width: 8px; height: 8px; flex: 0 0 8px; border-radius: 50%; background: #2e7d32; content: ""; }
       .brand-header { position: relative; padding-bottom: 4px; }
+      .brand-header::before { position: absolute; inset: -6px 0 0; z-index: 0; border-radius: 20px; background: repeating-linear-gradient(90deg, transparent 0 11px, color-mix(in srgb, var(--maroon), transparent 93%) 11px 13px); -webkit-mask-image: linear-gradient(to bottom, #000, transparent); mask-image: linear-gradient(to bottom, #000, transparent); content: ""; pointer-events: none; }
+      .brand-header > * { position: relative; z-index: 1; }
       .item-photo { position: relative; width: 72px; height: 72px; flex: 0 0 72px; overflow: hidden; border-radius: 14px; background: color-mix(in srgb, var(--maroon), transparent 90%); color: var(--maroon); }
       .item-photo.side { width: 52px; height: 52px; flex-basis: 52px; border-radius: 12px; }
       .item-photo svg { position: absolute; inset: 22%; width: 56%; height: 56%; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6; opacity: .75; }
@@ -165,9 +164,7 @@
       <article class="menu-card" aria-labelledby="page-title">
         <div id="open-notice" class="open-notice" role="status" hidden></div>
         <header class="brand-header">
-          <span class="brand-logo-wrap">
-            <img class="brand-logo" src="logo.png" alt="Eja" width="340" height="308" fetchpriority="high" decoding="async">
-          </span>
+          <img class="brand-logo" src="logo.png" alt="Eja" width="340" height="308" fetchpriority="high" decoding="async">
           <h1 id="page-title" class="brand-tagline">Fish barbecue</h1>
         </header>
         <section class="menu-section" aria-labelledby="fish-heading">
