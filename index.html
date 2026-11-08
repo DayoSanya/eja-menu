@@ -79,6 +79,8 @@
       .item-photo { position: relative; width: 72px; height: 72px; flex: 0 0 72px; overflow: hidden; border-radius: 14px; background: color-mix(in srgb, var(--maroon), transparent 90%); color: var(--maroon); }
       .item-photo.side { width: 52px; height: 52px; flex-basis: 52px; border-radius: 12px; }
       .item-photo svg { position: absolute; inset: 22%; width: 56%; height: 56%; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6; opacity: .75; }
+      .item-photo svg.illo { inset: 0; width: 100%; height: 100%; fill: #000; stroke: none; opacity: 1; }
+      .item-photo svg.ico { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
       .item-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
       .photo-badge { position: absolute; top: 4px; right: 4px; z-index: 2; display: grid; min-width: 22px; height: 22px; place-items: center; padding: 0 6px; border-radius: 999px; background: var(--maroon); color: var(--cream); font-size: 12px; font-weight: 700; line-height: 1; }
       .best-seller { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 999px; background: var(--orange); color: #2b1a22; font-size: 11px; font-weight: 700; letter-spacing: .02em; line-height: 1.4; vertical-align: 2px; white-space: nowrap; }
@@ -223,6 +225,80 @@
         // If a photo is missing, a simple icon is shown instead.
         const fishIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12c3-4.5 7-6 11-5 2.2.6 4 2 5.5 5-1.5 3-3.3 4.4-5.5 5-4 1-8-.5-11-5z"/><path d="M19 12l3-3.5v7z"/><circle cx="8.5" cy="11" r=".6"/></svg>';
         const plateIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg>';
+
+        // One-color 2D line illustrations used until a real photo is added for the item.
+        const svgOpen = '<svg class="illo ico" viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(32 32) scale(.9) translate(-32 -32)">';
+        const tone = ' fill="currentColor" fill-opacity=".14"';
+        const dot = (x, y, r = 1.5) => `<circle cx="${x}" cy="${y}" r="${r}" fill="currentColor" stroke="none"/>`;
+        const grate = '<path d="M7 50h50M15 50v6M26 50v6M38 50v6M49 50v6" stroke-width="2.2"/>';
+        const illustrations = {
+          'catfish': svgOpen + '<g transform="translate(0 3)">'
+            + '<path d="M6 31C8 24 16 21 24 21C34 20 46 24 52 29L60 22L57 31L60 40L52 34C46 38 34 42 24 41C16 41 8 38 6 31Z"' + tone + '/>'
+            + '<path d="M7 33C10 35 13 35 16 33"/>' + dot(14, 27, 1.5)
+            + '<path d="M7 30C3 30 1.5 35 3.5 41M8 28C3 25 2 20 4 17"/>'
+            + '<path d="M30 21L33 14L40 22"/><path d="M21 36L25 42L30 37"/>'
+            + '<path d="M28 25L25 36M35 25L32 38M42 27L39 36" stroke-width="2.2"/>'
+            + '</g></g></svg>',
+          'tilapia': svgOpen + '<g transform="translate(0 4)">'
+            + '<path d="M6 31C8 23 20 18 34 20C42 21 47 26 50 31L58 24V40L50 33C47 38 42 43 34 44C20 46 8 41 6 31Z"' + tone + '/>'
+            + '<circle cx="14" cy="29" r="2.6"/>' + dot(14, 29, 1)
+            + '<path d="M21 24C24 29 24 35 21 40"/>'
+            + '<path d="M29 24L26 38M36 23L33 40M43 26L40 37" stroke-width="2.2"/>'
+            + '</g></g></svg>',
+          'croaker': svgOpen + '<g transform="translate(0 4)">'
+            + '<path d="M4 31C9 25 22 22 36 24C43 25 48 28 51 31L59 25V38L51 33C47 37 42 40 34 41C20 42 9 39 4 31Z"' + tone + '/>'
+            + dot(11, 30, 1.5) + '<path d="M17 25C20 30 20 35 17 39"/>'
+            + '<path d="M26 26L23 38M33 25L30 39M40 27L37 37" stroke-width="2.2"/>'
+            + '</g></g></svg>',
+          'sweet-potato': svgOpen
+            + '<path d="M26 17C23 13 27 11 25 7M37 17C34 13 38 11 36 7M48 19C45 15 49 13 47 10" stroke-width="2.1"/>'
+            + '<path d="M4 46C10 31 26 22 42 24C52 25 59 30 60 37C58 45 44 50 30 50C18 50 8 49 4 46Z"' + tone + '/>'
+            + '<path d="M4 46L1 50"/>'
+            + '<path d="M14 41C24 34 38 32 53 35" stroke-width="2.1"/>'
+            + '<path d="M22 47l-1 4M34 50l1 4M46 48l2 3" stroke-width="2.1"/>'
+            + dot(24, 38, 1.1) + dot(36, 36, 1.1) + dot(46, 40, 1.1)
+            + '</g></svg>',
+          'roasted-plantain': svgOpen
+            + '<path d="M12 10C6 38 26 58 58 46C40 44 24 36 22 10Z"' + tone + '/>'
+            + '<path d="M13 10L14 4H20L21 10"/>'
+            + '<path d="M17 14C15 36 30 48 52 46" stroke-width="2.1"/>'
+            + dot(58, 46, 1.4)
+            + '</g></svg>',
+          'fried-plantain': svgOpen
+            + '<circle cx="32" cy="32" r="27"/><circle cx="32" cy="32" r="21" stroke-width="2"/>'
+            + '<g transform="rotate(-18 24 25)"><ellipse cx="24" cy="25" rx="10" ry="6.5"' + tone + '/><ellipse cx="24" cy="25" rx="5" ry="3" stroke-width="2"/></g>'
+            + '<g transform="rotate(14 42 26)"><ellipse cx="42" cy="26" rx="10" ry="6.5"' + tone + '/><ellipse cx="42" cy="26" rx="5" ry="3" stroke-width="2"/></g>'
+            + '<g transform="rotate(10 22 40)"><ellipse cx="22" cy="40" rx="10" ry="6.5"' + tone + '/><ellipse cx="22" cy="40" rx="5" ry="3" stroke-width="2"/></g>'
+            + '<g transform="rotate(-12 42 41)"><ellipse cx="42" cy="41" rx="10" ry="6.5"' + tone + '/><ellipse cx="42" cy="41" rx="5" ry="3" stroke-width="2"/></g>'
+            + '</g></svg>',
+          'french-fries': svgOpen
+            + '<rect x="14" y="9" width="6" height="27" rx="2" transform="rotate(-12 17 22)"' + tone + '/>'
+            + '<rect x="21" y="5" width="6" height="30" rx="2" transform="rotate(-5 24 20)"' + tone + '/>'
+            + '<rect x="29" y="8" width="6" height="28" rx="2"' + tone + '/>'
+            + '<rect x="37" y="5" width="6" height="30" rx="2" transform="rotate(6 40 20)"' + tone + '/>'
+            + '<rect x="44" y="10" width="6" height="26" rx="2" transform="rotate(13 47 23)"' + tone + '/>'
+            + '<path d="M12 33H52L47 58H17Z"' + tone + '/>'
+            + '<path d="M12 33Q17 38 22 33Q27 38 32 33Q37 38 42 33Q47 38 52 33" stroke-width="2.2"/>'
+            + '<path d="M32 43l3 3-3 4-3-4z" stroke-width="2.1"/>'
+            + '</g></svg>',
+          'yam-chips': svgOpen
+            + '<ellipse cx="32" cy="52" rx="26" ry="5"/>'
+            + '<rect x="12" y="38" width="40" height="9" rx="3.5"' + tone + '/>'
+            + '<rect x="10" y="28" width="38" height="9" rx="3.5"' + tone + ' transform="rotate(-3 29 32)"/>'
+            + '<rect x="14" y="18" width="40" height="9" rx="3.5"' + tone + ' transform="rotate(4 34 22)"/>'
+            + '<g transform="rotate(-24 32 11)"><rect x="14" y="7" width="36" height="9" rx="3.5"' + tone + '/></g>'
+            + dot(20, 42.5, 1.2) + dot(36, 42.5, 1.2) + dot(44, 42.5, 1.2) + dot(18, 32.5, 1.2) + dot(34, 31.5, 1.2) + dot(24, 22, 1.2) + dot(44, 23.5, 1.2)
+            + '</g></svg>',
+          'pepper-sauce': svgOpen
+            + '<path d="M9 36C9 51 18 59 32 59C46 59 55 51 55 36Z"' + tone + '/>'
+            + '<ellipse cx="32" cy="36" rx="23" ry="6.5"/>'
+            + '<path d="M22 37q4 2 8 0M36 36q4 2 8 0" stroke-width="2"/>'
+            + '<path d="M17 15C27 8 45 10 57 21C60 23 62 22 63 21C61 25 57 26 53 24C45 20 31 22 21 24C15 25 12 17 17 15Z"' + tone + '/>'
+            + '<path d="M17 15C12 13 11 8 14 6C17 7 19 11 17 15Z"/>'
+            + '<path d="M13 7L9 4"/>'
+            + '<path d="M26 14C35 13 44 16 51 20" stroke-width="2"/>'
+            + '</g></svg>',
+        };
         const openNotice = document.getElementById('open-notice');
         const quantities = Object.fromEntries(menuItems.map((item) => [item.id, 0]));
         const formatPrice = (amount) => `₦${amount.toLocaleString('en-US')}`;
@@ -254,7 +330,7 @@
             ? `<button class="quantity-button remove-button" type="button" data-item="${item.id}" data-change="-1" aria-label="Remove one ${item.name}">−</button><span class="quantity-value">${quantity}</span>`
             : '';
           const photoBadge = quantity > 0 ? `<span class="photo-badge" aria-hidden="true">${quantity}</span>` : '';
-          const photo = `<div class="item-photo ${item.category}">${item.category === 'fish' ? fishIcon : plateIcon}<img src="photos/${item.id}.jpg" alt="" loading="lazy" onerror="this.remove()">${photoBadge}</div>`;
+          const photo = `<div class="item-photo ${item.category}">${illustrations[item.id] || (item.category === 'fish' ? fishIcon : plateIcon)}<img src="photos/${item.id}.jpg" alt="" loading="lazy" onerror="this.remove()">${photoBadge}</div>`;
           const bestSeller = item.bestSeller && !item.soldOut ? '<span class="best-seller">Best seller</span>' : '';
           return `<li class="menu-row ${item.category}${item.soldOut ? ' is-sold-out' : ''}">${photo}<div class="item-information"><h3 class="item-name">${item.name}${bestSeller}</h3>${description}</div><div class="item-actions"><p class="item-price">${priceMarkup(item.price)}</p><div class="quantity-controls">${removeButton}${addButton}</div></div></li>`;
         }
