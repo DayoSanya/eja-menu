@@ -158,6 +158,8 @@
         *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
       }
     </style>
+    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script defer src="/_vercel/insights/script.js"></script>
   </head>
   <body>
     <main class="page-shell">
@@ -467,6 +469,21 @@
             // If the sheet can't be loaded, leave every item orderable and hide the notice.
           }
         }
+        // Analytics: count a real order when someone taps "Send order on WhatsApp" with items selected.
+        orderLink.addEventListener('click', () => {
+          try {
+            const picked = menuItems.filter((item) => quantities[item.id] > 0);
+            if (!picked.length || typeof window.va !== 'function') return;
+            window.va('event', {
+              name: 'Order Sent',
+              data: {
+                items: picked.reduce((sum, item) => sum + quantities[item.id], 0),
+                total: picked.reduce((sum, item) => sum + quantities[item.id] * item.price, 0),
+                mode: isDelivery ? 'delivery' : 'pickup',
+              },
+            });
+          } catch (error) {}
+        });
         loadAvailability();
       })();
     </script>
