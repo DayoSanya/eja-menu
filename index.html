@@ -158,8 +158,13 @@
         *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
       }
     </style>
-    <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
-    <script defer src="/_vercel/insights/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RVCK67H9QG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-RVCK67H9QG');
+    </script>
   </head>
   <body>
     <main class="page-shell">
@@ -473,14 +478,12 @@
         orderLink.addEventListener('click', () => {
           try {
             const picked = menuItems.filter((item) => quantities[item.id] > 0);
-            if (!picked.length || typeof window.va !== 'function') return;
-            window.va('event', {
-              name: 'Order Sent',
-              data: {
-                items: picked.reduce((sum, item) => sum + quantities[item.id], 0),
-                total: picked.reduce((sum, item) => sum + quantities[item.id] * item.price, 0),
-                mode: isDelivery ? 'delivery' : 'pickup',
-              },
+            if (!picked.length || typeof window.gtag !== 'function') return;
+            window.gtag('event', 'order_sent', {
+              items: picked.reduce((sum, item) => sum + quantities[item.id], 0),
+              value: picked.reduce((sum, item) => sum + quantities[item.id] * item.price, 0),
+              currency: 'NGN',
+              order_mode: isDelivery ? 'delivery' : 'pickup',
             });
           } catch (error) {}
         });
