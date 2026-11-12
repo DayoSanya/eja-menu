@@ -145,6 +145,38 @@
       .order-link:hover { background: #790040; }
       .order-link:active { transform: translateY(1px); }
       .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
+      .shop-info { margin: 18px 0 0; padding: 12px 14px; border-radius: 14px; background: color-mix(in srgb, var(--maroon), transparent 92%); font-size: 13px; line-height: 1.5; }
+      .shop-info[hidden] { display: none; }
+      .pickup-location { margin: 0 0 6px; }
+      .shop-info p { margin: 0; }
+      .shop-info p + p { margin-top: 4px; }
+      .shop-info strong { font-weight: 700; }
+      .shop-info a { color: var(--maroon); text-underline-offset: 3px; }
+      .faq-section { margin-top: clamp(32px, 8vw, 56px); }
+      .faq-toggle { cursor: pointer; list-style: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+      .faq-toggle::-webkit-details-marker { display: none; }
+      .faq-chevron { position: relative; width: 26px; height: 26px; flex: 0 0 26px; border: 2px solid var(--orange); border-radius: 50%; transition: background-color 150ms ease; }
+      .faq-chevron::before { position: absolute; top: 50%; left: 50%; width: 7px; height: 7px; border-right: 2.5px solid var(--orange); border-bottom: 2.5px solid var(--orange); content: ""; transform: translate(calc(-50% + .4px), calc(-50% - 2.6px)) rotate(45deg); transition: transform 150ms ease, border-color 150ms ease; }
+      .faq-section[open] .faq-chevron { background: var(--orange); }
+      .faq-section[open] .faq-chevron::before { border-color: var(--cream); transform: translate(calc(-50% + .4px), calc(-50% + 2.4px)) rotate(-135deg); }
+      .faq-section:not([open]) .faq-toggle { margin-bottom: 0; }
+      .faq-toggle:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; border-radius: 6px; }
+      .faq-item { border-top: 1px solid color-mix(in srgb, var(--maroon), transparent 70%); }
+      .faq-item:last-child { border-bottom: 1px solid color-mix(in srgb, var(--maroon), transparent 70%); }
+      .faq-item summary { display: flex; min-height: 48px; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; font-size: 14px; font-weight: 700; list-style: none; }
+      .faq-item summary::-webkit-details-marker { display: none; }
+      .faq-item summary::after { flex: 0 0 auto; font-size: 20px; font-weight: 400; line-height: 1; content: "+"; }
+      .faq-item[open] summary::after { content: "\2212"; }
+      .faq-item p { margin: 0 0 14px; font-size: 13px; line-height: 1.5; }
+      @media print {
+        @page { margin: 12mm; }
+        body { min-height: 0; padding: 0; background: #fff; }
+        .page-shell { min-height: 0; }
+        .menu-card { width: 100%; padding: 0; border-radius: 0; background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .open-notice, .item-actions .quantity-controls, .delivery-section, .details-section, .faq-section, .order-summary, .order-link, .photo-badge { display: none !important; }
+        .menu-row { break-inside: avoid; }
+        .brand-header::before { display: none; }
+      }
       @media (max-width: 360px) {
         body { padding-right: 12px; padding-left: 12px; }
         .menu-card { padding-right: 16px; padding-left: 16px; }
@@ -171,7 +203,7 @@
       <article class="menu-card" aria-labelledby="page-title">
         <div id="open-notice" class="open-notice" role="status" hidden></div>
         <header class="brand-header">
-          <img class="brand-logo" src="logo.png" alt="Eja" width="340" height="308" fetchpriority="high" decoding="async">
+          <img class="brand-logo" src="logo.png" alt="Eja" width="700" height="633" fetchpriority="high" decoding="async">
           <h1 id="page-title" class="brand-tagline">Fish barbecue</h1>
         </header>
         <section class="menu-section" aria-labelledby="fish-heading">
@@ -190,7 +222,8 @@
             <span class="switch-track" aria-hidden="true"></span>
           </label>
           <p id="delivery-note" class="delivery-note">Delivery fee is not included in the total and varies by location.</p>
-          <p id="pickup-note" class="delivery-note" hidden>Pickup location and time will be confirmed on WhatsApp.</p>
+          <p id="pickup-note" class="delivery-note" hidden>Pickup time will be confirmed on WhatsApp.</p>
+          <div id="pickup-location" class="shop-info pickup-location" hidden></div>
           <div id="address-group">
             <label class="field-label" for="delivery-address">Delivery address or landmark</label>
             <input id="delivery-address" class="field-input" type="text" autocomplete="street-address" maxlength="200" placeholder="Enter delivery address or landmark">
@@ -204,6 +237,15 @@
           <label class="field-label" for="order-note">Note <span class="optional">(optional)</span></label>
           <textarea id="order-note" class="field-input" rows="2" maxlength="300" placeholder="e.g. less spicy, no onions"></textarea>
         </section>
+        <details class="faq-section">
+          <summary class="section-heading faq-toggle"><span>Need help?</span><span class="faq-chevron" aria-hidden="true"></span></summary>
+          <details class="faq-item"><summary>How do I order?</summary><p>Tap + to add an item, and tap it again for more. Tap − to remove one. Then choose delivery or pickup and tap the order button. Your order opens in WhatsApp, ready to send.</p></details>
+          <details class="faq-item"><summary>Is the delivery fee in the total?</summary><p>No. Delivery fees vary by location and are confirmed with you on WhatsApp.</p></details>
+          <details id="faq-pickup" class="faq-item" hidden><summary>How do I pick up my order?</summary><p>Switch off Deliver to me to change it to Pickup instead. Tap the underlined location to get directions on Google Maps. We'll confirm the pickup time on WhatsApp.</p></details>
+          <details class="faq-item"><summary>Can I ask for changes to my fish?</summary><p>Yes. Add it in the Note field, for example "less spicy" or "no onions".</p></details>
+          <details class="faq-item"><summary>Why can't I add an item?</summary><p>Items marked Sold out are finished for now. They become available again when we update the menu.</p></details>
+          <details class="faq-item"><summary>Does this page save my details?</summary><p>Your name and address are remembered on this phone only, so repeat orders are quicker.</p></details>
+        </details>
         <section id="order-summary" class="order-summary" aria-labelledby="order-summary-heading" aria-live="polite" hidden>
           <h2 id="order-summary-heading" class="visually-hidden">Your order</h2>
           <ul id="summary-list" class="summary-list"></ul>
@@ -220,14 +262,19 @@
           { id: 'catfish', name: 'Catfish', description: 'Smoky, with pepper sauce', price: 5000, category: 'fish', bestSeller: true },
           { id: 'tilapia', name: 'Tilapia', description: 'Spiced and charcoal grilled', price: 6000, category: 'fish' },
           { id: 'croaker', name: 'Croaker', description: 'Whole fish, house marinade', price: 8000, category: 'fish' },
-          { id: 'sweet-potato', name: 'Sweet potato', price: 1000, category: 'side' },
-          { id: 'roasted-plantain', name: 'Roasted plantain', price: 1000, category: 'side' },
-          { id: 'fried-plantain', name: 'Fried plantain', price: 1500, category: 'side' },
-          { id: 'french-fries', name: 'French fries', price: 1500, category: 'side' },
-          { id: 'yam-chips', name: 'Yam chips', price: 2000, category: 'side' },
-          { id: 'pepper-sauce', name: 'Extra pepper sauce', price: 500, category: 'side' },
+          { id: 'sweet-potato', name: 'Sweet potato', description: 'Soft, lightly sweet', price: 1000, category: 'side' },
+          { id: 'roasted-plantain', name: 'Roasted plantain', description: 'Charred and tender', price: 1000, category: 'side' },
+          { id: 'fried-plantain', name: 'Fried plantain', description: 'Golden and crisp at the edges', price: 1500, category: 'side' },
+          { id: 'french-fries', name: 'French fries', description: 'Hot and crisp', price: 1500, category: 'side' },
+          { id: 'yam-chips', name: 'Yam chips', description: 'Thick cut and crunchy', price: 2000, category: 'side' },
+          { id: 'pepper-sauce', name: 'Extra pepper sauce', description: 'More heat on the side', price: 500, category: 'side' },
         ];
         const whatsappNumber = '2349027510364';
+        // Pickup spot shown in the Delivery section when Pickup is selected. Leave location empty to hide it.
+        const shopInfo = {
+          location: 'C&S College, Sabooke',
+          mapUrl: 'https://www.google.com/maps/place/FHQF%2BX85+Cherubim+And+Seraphim+College,+Sabo+Oke+Rd,+Oko+Erin+240101,+Kwara/@8.4898935,4.5733661,17z/data=!4m9!1m2!2m1!1sc%26s+college+ilorin!3m5!1s0x10364d6feeb489ab:0xc4596555380be9cf!8m2!3d8.4898935!4d4.5733661!16s%2Fg%2F11c61y3fqs',
+        };
         // Food photos: put images in a "photos" folder named after the item id (e.g. photos/catfish.jpg).
         // If a photo is missing, a simple icon is shown instead.
         const fishIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12c3-4.5 7-6 11-5 2.2.6 4 2 5.5 5-1.5 3-3.3 4.4-5.5 5-4 1-8-.5-11-5z"/><path d="M19 12l3-3.5v7z"/><circle cx="8.5" cy="11" r=".6"/></svg>';
@@ -307,6 +354,18 @@
             + '</g></svg>',
         };
         const openNotice = document.getElementById('open-notice');
+        const pickupLocation = document.getElementById('pickup-location');
+        const escapeHtml = (text) => text.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        // The pickup location shows only when "Pickup instead" is selected.
+        const hasPickupLocation = Boolean(shopInfo.location);
+        (function renderShopInfo() {
+          if (hasPickupLocation) {
+            document.getElementById('faq-pickup').hidden = false;
+            const place = escapeHtml(shopInfo.location);
+            const safeMap = /^https:\/\//.test(shopInfo.mapUrl) ? escapeHtml(shopInfo.mapUrl) : '';
+            pickupLocation.innerHTML = `<p><strong>Pickup:</strong> ${safeMap ? `<a href="${safeMap}" target="_blank" rel="noopener noreferrer">${place}</a>` : place}</p>`;
+          }
+        })();
         const quantities = Object.fromEntries(menuItems.map((item) => [item.id, 0]));
         const formatPrice = (amount) => `₦${amount.toLocaleString('en-US')}`;
         const priceMarkup = (amount) => `<span class="price-value"><svg class="naira-mark" viewBox="0 0 14 18" aria-hidden="true"><path d="M3 15V3l8 12V3M1 8h12M1 11h12"/></svg><span>${amount.toLocaleString('en-US')}</span><span class="visually-hidden">Nigerian naira</span></span>`;
@@ -364,7 +423,7 @@
               `*Total: ${formatPrice(total)}*`,
               ...(isDelivery
                 ? [address ? `*Delivery address: ${address}*` : '*Delivery address:* _(not decided)_']
-                : ['*Pickup*']),
+                : [hasPickupLocation ? `*Pickup: ${shopInfo.location}*` : '*Pickup*']),
               ...(name ? [`*Name: ${name}*`] : []),
               ...(note ? [`Note: ${note}`] : []),
             ].join('\n');
@@ -386,6 +445,7 @@
           deliveryMode.setAttribute('aria-label', `${isDelivery ? 'Delivery' : 'Pickup'} selected`);
           deliveryNote.hidden = !isDelivery;
           pickupNote.hidden = isDelivery;
+          pickupLocation.hidden = isDelivery || !hasPickupLocation;
           addressGroup.hidden = !isDelivery;
           render();
         });
